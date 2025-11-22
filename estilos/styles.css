@@ -441,7 +441,6 @@ body {
 /* ======================================================= */
 /* 6. CARRUSEL DE TRABAJOS (Galería) 🖼️                    */
 /* ======================================================= */
-
 /* 0. Contenedor Envolvente para Flechas y Carrusel */
 .carrusel-wrapper {
     position: relative; 
@@ -460,6 +459,8 @@ body {
     overflow: hidden; 
     margin: 0;
     border-radius: 0;
+    /* ✅ CLAVE 1: Padding para el espacio inicial/final */
+    padding: 0 15px; 
     box-shadow: none;
     background-color: transparent; 
 }
@@ -469,24 +470,25 @@ body {
     display: flex; 
     width: fit-content; 
     transition: transform 0.5s ease-in-out; 
-    margin: 0 -15px; /* CLAVE: Para eliminar el "hueco gris" */
+    /* ✅ CLAVE 2: Margin negativo ELIMINADO */
+    margin: 0; 
 }
 
-/* 3. Ítem Individual (Diapositiva) - REGLAS CONSOLIDADAS */
-/* Se eliminaron las reglas `.trabajos-galeria` y `.trabajo-item` duplicadas */
+/* 3. Ítem Individual (Diapositiva) */
 .trabajo-item {
+    /* El ancho del contenido */
     min-width: calc(1160px / 3); 
     flex-shrink: 0; 
     height: auto; 
-    margin: 0 15px; /* Espacio entre ítems */
+    /* El margen que el JS debe sumar (15px + 15px = 30px) */
+    margin: 0 15px; 
+    /* Esto es correcto y ayuda al calc() */
     box-sizing: border-box; 
     display: flex; 
-    flex-direction: column; /* Asegura que la imagen esté centrada */
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
     transition: none; 
-    
-    /* Reglas visuales originales (sin sombras, sin movimiento hover) */
     box-shadow: none;
     border-radius: 0;
     overflow: hidden; 
@@ -494,7 +496,7 @@ body {
 
 .trabajo-item img {
     width: 100%; 
-    height: 250px; /* Altura fija para la imagen */
+    height: 250px; 
     object-fit: cover; 
     display: block; 
     border-radius: 0;
@@ -771,7 +773,6 @@ footer {
 
     /* CLAVE: Usamos 'contain' para que la imagen entera se ajuste sin zoom ni recorte excesivo. */
     .slide {
-        background-size: contain; 
         background-repeat: no-repeat; /* Evita que la imagen se repita */
         background-position: center center;
     }

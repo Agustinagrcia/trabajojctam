@@ -35,9 +35,7 @@
 
 
 
-
-
-/*carrusel trabajo */
+/*carrusel trabajo *//*carrusel trabajo */
 document.addEventListener('DOMContentLoaded', () => {
     const galeria = document.querySelector('.carrusel-galeria');
     const flechaPrev = document.querySelector('.carrusel-flecha.prev');
@@ -45,44 +43,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll('.trabajo-item');
     
     let currentIndex = 0;
-    const totalItems = items.length; // Si tienes 6 imágenes, totalItems será 6.
+    const totalItems = items.length; 
     
-    // Si hay menos de 3 ítems (la vista mínima), no hacemos nada.
-    // **NOTA:** Este valor de '3' debe coincidir con la cantidad visible en CSS.
     if (totalItems < 3) return; 
 
-    // --- FUNCIÓN PRINCIPAL DE MOVIMIENTO ---
-
+    // --- FUNCIÓN PRINCIPAL DE MOVIMIENTO (VERSIÓN DEFINITIVA) ---
+    // Usamos offsetLeft para obtener el desplazamiento exacto del elemento,
+    // eliminando errores de redondeo del cálculo manual (offsetWidth + 30).
     const updateCarrusel = () => {
-        // Obtenemos el ancho de un solo item
-        const itemWidth = items[0].offsetWidth; 
+        // Obtenemos el elemento que debe ser el primero visible.
+        const itemAdesplazar = items[currentIndex];
         
-        // Calculamos el desplazamiento: (el índice actual) * (el ancho de un item)
-        const desplazamiento = currentIndex * itemWidth;
+        // offsetLeft da la posición X del elemento relativa a su contenedor padre (carrusel-galeria).
+        // Esta posición ya incluye el ancho del ítem MÁS su margen izquierdo (15px) y 
+        // el margen derecho de los ítems anteriores.
+        const desplazamiento = itemAdesplazar.offsetLeft;
         
-        // Aplica el desplazamiento suave (gracias a la transición CSS)
+        // Aplicamos el desplazamiento, asegurando que el ítem[currentIndex] se mueva al borde izquierdo del carrusel-contenedor
+        // (que tiene un padding de 15px, lo cual está bien porque el ítemAdesplazar tiene un margen izquierdo de 15px).
         galeria.style.transform = `translateX(-${desplazamiento}px)`;
     };
 
     // --- FUNCIONES DE NAVEGACIÓN (Bucle Infinito) ---
 
     const nextSlide = () => {
-        // Bucle Adelante: Si es el último slide que se puede ver, vuelve al inicio.
-        if (currentIndex < totalItems - 3) { 
+        // El último índice al que podemos desplazarnos para que aún se vean 3 ítems
+        const maxIndex = totalItems - 3; 
+
+        if (currentIndex < maxIndex) { 
             currentIndex++;
         } else {
-            currentIndex = 0; // Vuelve al primer slide
+            currentIndex = 0; // Vuelve al inicio
         }
         updateCarrusel();
     };
 
     const prevSlide = () => {
-        // Bucle Atrás: Si es el primer slide (índice 0), va al último slide visible.
+        const maxIndex = totalItems - 3; 
+        
         if (currentIndex > 0) {
             currentIndex--;
         } else {
-            // El último índice al que se puede mover es totalItems - 3
-            currentIndex = totalItems - 3; 
+            // Ir al último slide visible
+            currentIndex = maxIndex; 
         }
         updateCarrusel();
     };
@@ -92,8 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
     flechaNext.addEventListener('click', nextSlide);
     flechaPrev.addEventListener('click', prevSlide);
 
-    // ------------------------------------------------------------------
-    // CLAVE: Se elimina la sección AUTOPLAY para que la navegación sea 
-    //        exclusivamente manual al hacer click en las flechas.
-    // ------------------------------------------------------------------
+    // Opcional: Recalcular en caso de redimensionamiento (responsive)
+    // window.addEventListener('resize', updateCarrusel);
+
+    // Inicializa la posición al cargar
+    updateCarrusel();
 });
