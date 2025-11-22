@@ -1,0 +1,74 @@
+
+footer {
+    width: 100%;
+}
+
+.footer-content {
+    background-color: var(--color-footer-bg);
+    padding: 30px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* ⬇️ CORRECCIÓN CLAVE AQUÍ: Alinear Iconos y Texto ⬇️ */
+.footer-contact-info {
+    text-align: left;
+    color: var(--color-text-dark);
+    font-size: 1rem;
+}
+
+/* Aplicamos 'display: flex' a los enlaces y párrafos para centrar verticalmente el icono */
+.footer-contact-info a, 
+.footer-contact-info p {
+    display: flex; /* Alinea el icono y el texto en la misma línea */
+    align-items: center; /* Centra verticalmente el icono y el texto */
+    color: var(--color-secondary);
+    transition: color 0.3s ease;
+    margin: 10px 0; /* Más espacio entre los elementos */
+    text-decoration: none;
+}
+
+/* Estilo del Icono */
+.footer-contact-info i {
+    margin-right: 12px; /* Más separación entre icono y texto */
+    width: 20px; /* Asegura un ancho fijo para todos los iconos */
+    text-align: center;
+    /* Necesitas transición para que el color del icono cambie suavemente */
+    transition: color 0.3s ease; 
+}
+
+/* HOVER: Cambia el color del texto del enlace */
+.footer-contact-info a:hover {
+    color: var(--color-primary); /* Color de acento al pasar el cursor */
+}
+
+/* HOVER: Cambia el color del icono a HEREDAR el color del padre (el <a>) */
+.footer-contact-info a:hover i {
+    color: inherit; 
+}
+/* ⬆️ FIN DE CORRECCIÓN ⬆️ */
+
+
+/* --- Estilos Adicionales --- */
+
+.footer-logo {
+    color: var(--color-primary);
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.footer-logo img {
+    max-width: 150px; 
+    height: auto;
+}
+
+.footer-bottom-bar {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    padding: 10px 5%;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

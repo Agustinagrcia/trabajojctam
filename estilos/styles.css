@@ -25,12 +25,16 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    font-family: Arial, sans-serif; /* Usando Arial como solicitaste */
+    font-family: 'lato'; /* Usando Arial como solicitaste */
     background-color: var(--color-light-bg);
     color: var(--color-text-dark);
     overflow-x: hidden;
 }
-
+#empresa, 
+#servicios, 
+#trabajos {
+    scroll-margin-top: 70px; /* Ajusta este valor según la altura real de tu menú */
+}
 
 /* ======================================================= */
 /* 3. HEADER Y NAVEGACIÓN 🧭                              */
@@ -42,68 +46,138 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
-    position: fixed; /* CLAVE: Para que se mantenga fijo */
+    position: fixed; 
     width: 100%;
     top: 0;
     left: 0;
     z-index: 100;
-    height: var(--header-height); /* CLAVE: Altura definida */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    height: var(--header-height);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra más definida */
 }
 
 .logo {
     font-size: 1.8em;
     font-weight: bold;
     color: var(--color-primary);
+    /* Animación sutil al pasar el ratón por el logo */
+    transition: transform 0.3s ease-out;
 }
 
+.logo:hover {
+    transform: scale(1.05); /* Ligeramente más grande al hacer hover */
+}
+
+/* === NAVEGACIÓN DE ESCRITORIO (INCLUYE EFECTO PARA EMPRESA/MENU) === */
 .main-nav a {
     color: var(--color-text-light);
     text-decoration: none;
     margin: 0 15px;
     font-weight: 500;
-    transition: color 0.3s;
+    text-transform: uppercase;
+    
+    /* 2. Reducir el tamaño para que no se vea "guasas" */
+    font-size: 0.9rem; 
+    
+    /* 3. Añadir espacio para mejorar la legibilidad */
+    letter-spacing: 0.1em;
+    
+    position: relative; 
+    padding-bottom: 5px; /* Espacio para la línea */
+    /* Reseteamos la transición para no chocar con el pseudo-elemento */
+    transition: color 0.3s ease-in-out; 
 }
 
-.main-nav a:hover {
-    color: var(--color-primary);
+/* Estructura de la línea dinámica */
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: white; 
+    transform: scaleX(0); /* Inicialmente oculto (ancho 0) */
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: right; /* La animación empieza desde la derecha */
 }
 
+/* Animación de hover (Slide-in) */
+.main-nav a:hover::after {
+    transform: scaleX(1); /* Se expande al ancho completo */
+    transform-origin: left; /* Y finaliza su origen a la izquierda */
+}
 /* --- ESTILOS DE BOTÓN DE ACCIÓN (CTA Header y Services) --- */
+/* --- ESTILOS DE BOTÓN DE ACCIÓN (CTA Header, Services y Mobile Hero) --- */
 .cta-header,
-.cta-service-card {
+.cta-service-card,
+.cta-hero {
+    /* Propiedades Base */
     display: inline-block;
+    position: relative; /* ¡Importante! Necesario para posicionar el destello (pseudo-elemento) */
+    overflow: hidden; /* Oculta el destello hasta que se mueve */
     text-decoration: none;
     text-align: center;
     white-space: nowrap;
-    
-    background-color: var(--color-primary);
-    color: var(--color-text-light); 
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.cta-header {
-    /* Color de texto específico para el botón de la cabecera (sobre fondo primario) */
-    color: var(--color-secondary); 
     padding: 10px 20px;
-    font-weight: 700;
+    font-weight: bold;
+    
+    /* 1. Estilo Solicitado: Fondo Transparente, Borde y Texto Blanco */
+    background-color: transparent; /* Fondo del botón transparente (o del color de fondo) */
+    border: 2px solid white; /* Borde blanco */
+    color: white; /* Color del texto blanco */
+    
+    /* 2. Transición y Sombra Base (Opcional) */
+    transition: all 0.5s ease-in-out;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Sombra sutil de neón blanco */
+        text-transform: uppercase;
+    
+    /* 2. Reducir el tamaño para que no se vea "guasas" */
+    font-size: 0.9rem; /* Prueba con un tamaño un poco más pequeño */
+    letter-spacing: 0.1em;
 }
 
-.cta-service-card {
-    margin-top: auto;
-    width: 100%;
-    padding: 12px 25px;
-    font-weight: 600;
+/* 🌟 Creación del Destello Animado (Pseudo-elemento) */
+.cta-header::before,
+.cta-service-card::before,
+.cta-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Empieza fuera del botón, a la izquierda */
+    width: 30%; /* Ancho del destello */
+    height: 100%;
+    
+    /* El destello: un degradado transparente a blanco y de vuelta a transparente */
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), /* El color blanco semi-transparente del destello */
+        transparent
+    );
+    
+    /* Rotación para el efecto diagonal */
+    transform: skewX(-20deg); 
+    
+    /* Transición para el movimiento del destello */
+    transition: all 0.8s ease; 
 }
 
+/* 🚀 Efecto HOVER: Movimiento del Destello */
+.cta-header:hover::before,
+.cta-service-card:hover::before,
+.cta-hero:hover::before {
+    /* Mueve el destello de -100% a +150% (para que cruce completamente el botón) */
+    left: 120%; 
+}
+
+/* Opcional: Estilo adicional en hover para el botón (mantener el "pop-up" anterior o cambiar) */
 .cta-header:hover,
-.cta-service-card:hover {
-    background-color: #00A9BE;
+.cta-service-card:hover,
+.cta-hero:hover {
+    transform: translateY(-1px); /* Un ligero levantamiento */
+    box-shadow: 0 0 9px rgba(255, 255, 255, 0.5); /* Sombra de neón más intensa */
 }
 
 /* --- ESTILOS DEL BOTÓN DE HAMBURGUESA --- */
@@ -204,16 +278,31 @@ body {
     color: var(--color-text-light); 
 }
 
+/* --- ESTILO DE TÍTULO H1: Minimalista, Grande y Fino (Light) --- */
 .hero-content h1 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem); 
-    font-weight: 700; /* Ajustado de 900 a 700 según tu bloque */
+    /* 1. TAMAÑO AJUSTADO: Grande, pero no dominante (Min: 2.2rem, Max: 3.5rem) */
+    font-size: clamp(2.2rem, 5vw, 3.5rem); 
+    
+    /* 2. LETRAS EXTRA FINAS */
+    font-weight: 500; 
+    
     line-height: 1.1;
     color: var(--color-text-light); 
+    
+    /* 3. Estilo Limpio */
+    text-transform: uppercase;
+    letter-spacing: 0.1em; /* Un poco más de espaciado con letras finas queda mejor */
+    
+    /* 4. Sombra Sutil */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); /* Sombra también más sutil */
+    
+    margin-bottom: 15px; 
 }
 
 .hero-content p {
     font-size: clamp(1rem, 2vw, 1.25rem);
     line-height: 1.4;
+    font-weight: 100;
     color: var(--color-text-light); 
 }
 
@@ -266,121 +355,8 @@ body {
     transform: scale(1.2); 
 }
 
-
 /* ======================================================= */
-/* 6. RESPONSIVE DESIGN (Aplicado a 1224px y abajo) 📱/💻 */
-/* (Se mantiene toda la lógica del menú hamburguesa) */
-/* ======================================================= */
-
-/* Media Query: Aplica para 1224px y abajo (Desktop pequeño, Tablet, Móvil) */
-@media (max-width: 1224px) {
-    
-    /* --- HEADER (Cambio a Hamburguesa) --- */
-    .main-nav,
-    .cta-header {
-        display: none;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .mobile-nav {
-        position: absolute;
-        top: var(--header-height); 
-        right: 0;
-        width: 70%; 
-        background-color: var(--color-secondary);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        z-index: 99;
-        
-        display: none; 
-        padding: 20px;
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        opacity: 0;
-        transform: translateX(100%);
-    }
-    
-    .mobile-nav.is-open {
-        display: block;
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    .mobile-nav a {
-        display: block;
-        padding: 12px 0;
-        text-align: right;
-        color: var(--color-text-light);
-        text-decoration: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .mobile-nav a:last-child {
-        border-bottom: none;
-    }
-
-    .mobile-nav .cta-hero {
-        margin-top: 20px;
-        text-align: center;
-        padding: 10px 20px; 
-        width: 100%;
-        display: block;
-        color: var(--color-secondary); 
-        font-weight: 700;
-    }
-    
-    /* --- HERO CONTENT (Ajustes de Lectura para Tablet/Móvil) --- */
-    .hero-section {
-        height: 80vh; 
-        align-items: flex-end; 
-        justify-content: center; 
-    }
-
-    .hero-overlay {
-        background: linear-gradient(
-            to top,
-            rgba(0, 0, 0, 0.8) 0%,   
-            rgba(0, 0, 0, 0.0) 80%    
-        );
-    }
-    
-    .hero-content {
-        padding: 20px 15px; 
-        padding-left: 15px; 
-        text-align: center; 
-        max-width: 100%;
-        margin: 0 auto; 
-    }
-    
-    .hero-content h1 {
-        font-size: 1.8rem; 
-        line-height: 1.2;
-    }
-
-    .hero-content p {
-        font-size: 0.9rem; 
-    }
-    
-    .cta-hero {
-        margin-top: 15px; 
-    }
-
-    .carousel-dots {
-        text-align: center; 
-        margin-top: 20px; 
-    }
-}
-
-/* Media Query Específica para MÓVILES pequeños (Menos de 768px) */
-@media (max-width: 768px) {
-    .hero-section {
-        height: 60vh; 
-    }
-}
-
-/* ======================================================= */
-/* 5. SECCIONES GENERALES (Empresa, Trabajos, Servicios) 📄 */
+/* 6. SECCIONES GENERALES (Empresa, Trabajos, Servicios) 📄 */
 /* ======================================================= */
 .section-empresa,
 .section-trabajos,
@@ -389,41 +365,58 @@ body {
     text-align: center;
 }
 
+/* --- Estilo de Títulos H2 (Títulos Espaciados y Limpios) --- */
 .section-empresa h2,
 .section-trabajos h2,
 .section-servicios h2 {
-    color: var(--color-primary); /* Se cambia a primary como color de acento para títulos */
-    font-size: 2.5rem;
+    color: var(--color-secondary); /* Usamos el color oscuro para mejor contraste */
+    font-size: 2.2rem;
     font-weight: 700;
+    text-transform: uppercase; /* Convierte a MAYÚSCULAS */
+    letter-spacing: 0.25em; /* Añade espaciado significativo */
+    
+    text-align: center;
+    position: relative; 
+    padding-bottom: 15px; /* Espacio para la línea */
     margin-bottom: 40px;
 }
+
+/* Línea de Acento Sutil debajo de los Títulos */
+.section-empresa h2::after,
+.section-trabajos h2::after,
+.section-servicios h2::after {
+    content: '';
+    display: block;
+    width: 60px; /* Ancho de la línea */
+    height: 3px; 
+    background-color: var(--color-primary); /* Línea en color de acento */
+    margin: 5px auto 0; /* Centrar la línea debajo del texto */
+    border-radius: 2px;
+}
+/* ---------------------------------------------------- */
 
 /* --- SECCIÓN EMPRESA (Fondo Blanco) --- */
 .section-empresa {
     background-color: var(--color-text-light); 
 }
-
+/* --- Estilos para Párrafos Largos y de la Sección Empresa --- */
 .section-empresa p {
-    color: var(--color-text-dark);
+    color: var(--color-text-dark); /* Color Gris Oscuro (#343a40) */
     max-width: 800px;
     margin: 0 auto;
-    line-height: 1.6;
-    font-size: 1.1rem;
+    
+    /* CLAVE: Interlineado para mejor lectura */
+    line-height: 1.7; 
+    
+    /* CLAVE: Tamaño base ligeramente ajustado */
+    font-size: 1.1rem; 
+    
+    /* Opcional: Espaciado si quieres que se vean más como un bloque de texto */
+    /* letter-spacing: 0.01em; */
 }
-
-.section-empresa p strong {
-    color: var(--color-secondary);
-    font-weight: 700;
-}
-
 /* --- SECCIÓN SERVICIOS (Fondo Gris Claro) --- */
 .section-servicios {
     background-color: var(--color-light-bg);
-}
-
-.section-servicios h2 {
-    color: var(--color-text-dark); /* Título de servicios en color oscuro */
-    margin-bottom: 20px;
 }
 
 .service-intro-text {
@@ -439,7 +432,7 @@ body {
 }
 
 /* ======================================================= */
-/* 6. CARRUSEL DE TRABAJOS (Galería) 🖼️                    */
+/* 7. CARRUSEL DE TRABAJOS (Galería) 🖼️                    */
 /* ======================================================= */
 /* 0. Contenedor Envolvente para Flechas y Carrusel */
 .carrusel-wrapper {
@@ -543,7 +536,7 @@ body {
 
 
 /* ======================================================= */
-/* 7. SECCIÓN SERVICIOS (Diseño Invertido) ⚙️              */
+/* 8. SECCIÓN SERVICIOS (Diseño Invertido) ⚙️              */
 /* ======================================================= */
 
 /* Contenedor principal con Flexbox + wrap */
@@ -601,7 +594,7 @@ body {
 /* Componentes de la tarjeta */
 .service-image {
     width: 60px;
-    height: auto;
+    height: 60px;
     margin-bottom: 20px;
     align-self: center;
 }
@@ -621,190 +614,33 @@ body {
     margin-bottom: 20px;
     min-height: 60px;
 }
-
-
-/* ======================================================= */
-/* 8. FOOTER ⬇️                                            */
-/* ======================================================= */
-footer {
-    width: 100%;
-}
-
-.footer-content {
-    background-color: var(--color-footer-bg);
-    padding: 30px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.footer-contact-info {
-    text-align: left;
-    color: var(--color-text-dark);
-    font-size: 1rem;
-}
-
-.footer-contact-info a {
-    display: block;
-    color: var(--color-secondary);
-    transition: color 0.3s;
-    margin: 5px 0;
-    text-decoration: none;
-}
-
-.footer-contact-info a:hover {
-    color: var(--color-primary);
-}
-
-.footer-contact-info p {
-    color: var(--color-secondary);
-    margin: 5px 0;
-}
-
-.footer-contact-info i {
-    color: var(--color-primary);
-    margin-right: 10px;
-    width: 15px;
-    text-align: center;
-}
-
-.footer-logo {
-    color: var(--color-primary);
-    font-size: 30px;
-    font-weight: 700;
-}
-
-.footer-logo img {
-    max-width: 150px; 
-    height: auto;
-}
-
-.footer-bottom-bar {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    padding: 10px 5%;
-    font-size: 0.9rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* ======================================================= */
-/* 9. MEDIA QUERIES (Responsivo Consolidado) 📱            */
-/* ======================================================= */
-
-/* Tablet Horizontal y Escritorio Pequeño (Max-width 1240px) */
-@media (max-width: 1240px) {
-    .carrusel-wrapper {
-        max-width: 100%; 
-        padding: 0 5px; 
-    }
-}
-
-/* Tablet (Max-width 1050px) */
-@media (max-width: 1050px) {
-    /* Estructura de Servicios: Pasan a columna */
-    .services-top-row,
-    .services-bottom-row {
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 0;
-        gap: 20px; /* Espaciado entre tarjetas apiladas */
-    }
+/* --- Estilo Específico para el Botón dentro de la Tarjeta de Servicio --- */
+.service-card .cta-service-card {
+    /* Reiniciamos los estilos de color para que se vea sobre fondo claro */
+    background-color: var(--color-primary); /* Fondo azul de acento */
+    color: var(--color-text-light); /* Texto blanco */
+    border: none; /* Quitamos el borde blanco que lo hacía invisible */
+    padding: 10px;
+    font-weight: bold;
+    margin-top: auto; /* Empuja el botón hacia abajo en la tarjeta flexible */
     
-    .services-bottom-row {
-        margin-top: 20px; /* Mantiene la separación entre las filas apiladas */
-    }
-    
-    .service-card {
-        width: 100%; /* Permite que ocupe todo el ancho disponible */
-        max-width: 400px;
-    }
+    /* Reajustamos la sombra para que se vea bien en fondo claro */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Carrusel de Trabajos a 2 columnas (Max-width 900px) */
-@media (max-width: 900px) {
-    .trabajo-item {
-        margin: 0 15px; 
-        min-width: calc(100% / 2); /* Muestra 2 imágenes */
-    }
-    .carrusel-galeria {
-        margin: 0 -15px; 
-    }
+.service-card .cta-service-card:hover {
+    background-color: #00A9BE; /* Un tono ligeramente más oscuro en hover */
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
 }
 
-
-/* Móvil (Max-width 768px) */
-@media (max-width: 768px) {
-    
-    /* Trabajos y Servicios - APILADO COMPLETO */
-    /* El carrusel de trabajos se maneja abajo, pero esta regla asegura el apilamiento general si no hay carrusel */
-    .trabajo-item {
-        width: 100%;
-        max-width: 90%;
-    }
-    
-    /* Footer */
-    .footer-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .footer-bottom-bar {
-        flex-direction: column;
-        gap: 5px;
-    }
-}
-
-/* Carrusel de Trabajos a 1 columna (Max-width 600px) */
-@media (max-width: 600px) {
-    /* ---------------------------------------------------- */
-    /* ✅ AJUSTES DEL HERO SECTION (Fix de Imagen con CONTAIN) 🚀 */
-    /* ---------------------------------------------------- */
-    .hero-section {
-        /* Altura ligeramente más alta para el texto (55% de la vista) */
-        height: 55vh; 
-        /* Mantener el contenido pegado abajo */
-        align-items: flex-end; 
-        /* Añadimos un padding para el margen del texto */
-        padding: 20px; 
-    }
-
-    /* CLAVE: Usamos 'contain' para que la imagen entera se ajuste sin zoom ni recorte excesivo. */
-    .slide {
-        background-repeat: no-repeat; /* Evita que la imagen se repita */
-        background-position: center center;
-    }
-
-    .hero-content {
-        max-width: 100%; 
-        text-align: left; 
-    }
-
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .hero-content p {
-        font-size: 0.95rem;
-    }
-    
-    .carousel-dots {
-        margin-top: 15px;
-    }
-    /* ---------------------------------------------------- */
-    
-    /* Ajustes del Carrusel de Trabajos */
-    .trabajo-item {
-        min-width: 100%; 
-        margin: 0 10px; 
-    }
-    .carrusel-galeria {
-        margin: 0 -10px; 
-    }
-    .carrusel-flecha {
-        font-size: 24px; 
-        padding: 10px 10px;
-    }
+/* Además, debemos ajustar el pseudo-elemento (el destello) */
+.service-card .cta-service-card::before {
+    /* Cambiamos el color del destello para que se vea bien sobre el azul */
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.7), /* Un destello más brillante */
+        transparent
+    );
 }
