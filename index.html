@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JCTAM -Servicios integrales.</title>
+    <link rel="stylesheet" href="./estilos/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJgT2I9dC019dKx8pQ/TzE2Xp5n7T8iP/X48gE/nB4X/u8H90P6+T7K4L3P5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">JCTAM</div>
+        
+        <!-- NAVEGACIÓN DE ESCRITORIO -->
+        <nav class="main-nav">
+            <a href="#empresa">EMPRESA</a>
+            <a href="#servicios">SERVICIOS</a>
+            <a href="#trabajos">TRABAJOS</a>
+        </nav>
+        
+        <!-- CTA DE ESCRITORIO -->
+        <a href="https://wa.me/5493364010482" class="cta-header" target="_blank">
+            SOLICITAR PRESUPUESTO
+        </a>
+
+        <!-- BOTÓN HAMBURGUESA (visible solo en móvil/tablet) -->
+        <!-- Usamos el carácter unicode para la hamburguesa -->
+        <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+        
+        <!-- MENÚ MÓVIL (visible solo al abrir la hamburguesa) -->
+        <nav class="mobile-nav" id="mobile-menu">
+            <a href="#empresa">EMPRESA</a>
+            <a href="#servicios">SERVICIOS</a>
+            <a href="#trabajos">TRABAJOS</a>
+            <!-- CTA del menú móvil, usando la clase cta-hero para el estilo de botón -->
+            <a href="https://wa.me/5493364010482" class="cta-hero" target="_blank">SOLICITAR PRESUPUESTO</a>
+        </nav>
+    </header>
+<section class="hero-section">
+    <div class="carousel-slides">
+        <div class="slide active-slide" style="background-image: url('./assets/Technician-installing-ac-inside-1024x683_imgupscaler.ai_Mejorador_2K.jpg');"></div>
+        <div class="slide" style="background-image: url('./assets/bombahheader.png');"></div>
+        <div class="slide" style="background-image: url('assets/energia-instalaciones_imgupscaler.ai_Mejorador_2K.jpg');"></div>
+    </div>
+    
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-content">
+        <h1>SERVICIOS INTEGRALES</h1>
+        <p> Instalación de aires acondicionados, plomería, electricidad, mantenimiento.</p>
+        <a href="https://wa.me/5493364010482" class="cta-hero">CONSULTANOS</a>
+        <div class="carousel-dots">
+            <span class="dot active-dot" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+        </div>
+    </div>
+</section>
+    <!-- EMPRESA -->
+    <section class="section-empresa" id="empresa">
+        <h2>EMPRESA</h2>
+        <p>Somos una empresa joven, impulsada por la innovación y respaldada por una vasta experiencia en la resolución de desafíos. Nuestra clave es la capacitación constante para ofrecer soluciones eficientes y definitivas. La calidad de nuestro servicio es nuestro mayor compromiso.</p>
+    </section>
+
+    <!-- ====================== SERVICIOS – NUEVO DISEÑO TRIÁNGULO INVERTIDO ====================== -->
+    <section class="section-servicios" id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <p class="service-intro-text">
+            Ofrecemos soluciones profesionales y garantizadas en las áreas clave de tu hogar o negocio.
+        </p>
+
+        <div class="services-wrapper">
+
+            <!-- FILA SUPERIOR: 3 tarjetas -->
+            <div class="services-top-row">
+                <div class="service-card">
+                    <img src="assets/aires-acondicionados.png" alt="Aire Acondicionado" class="service-image">
+                    <h3>Aires Acondicionados</h3>
+                    <p>Instalación, mantenimiento y reparación de equipos Split, ventana e Inverter. Todas las marcas.</p>
+                    <a href="https://wa.me/5493364010482" class="cta-service-card" target="_blank">SOLICITAR PRESUPUESTO</a>
+                </div>
+
+                <div class="service-card">
+                    <img src="assets/plomerialogo.png" alt="Plomería y Gas" class="service-image">
+                    <h3>Plomería general</h3>
+                    <p>Reparación y mantenimiento de sistemas de cisternas para garantizar el suministro de agua potable.</p>
+                    <a href="https://wa.me/5493364010482" class="cta-service-card" target="_blank">SOLICITAR PRESUPUESTO</a>
+                </div>
+
+                <div class="service-card">
+                    <img src="assets/logoelectricidad.png" alt="Electricidad" class="service-image">
+                    <h3>Electricidad</h3>
+                    <p>Instalaciones completas, reparaciones de averías y cumplimiento de normativas de seguridad.</p>
+                    <a href="https://wa.me/5493364010482" class="cta-service-card" target="_blank">SOLICITAR PRESUPUESTO</a>
+                </div>
+            </div>
+
+            <!-- FILA INFERIOR: 2 tarjetas centradas (triángulo invertido) -->
+            <div class="services-bottom-row">
+                <div class="service-card">
+                    <img src="assets/mantenimiento.png" alt="Mantenimiento de Piletas" class="service-image">
+                    <h3>Mantenimiento de Piletas</h3>
+                    <p>Limpieza física, optimización del equipamiento (filtro y bomba), y control químico del agua</p>
+                    <a href="https://wa.me/5493364010482" class="cta-service-card" target="_blank">SOLICITAR PRESUPUESTO</a>
+                </div>
+
+                <div class="service-card">
+                    <img src="assets/bombasdeagualogo.png" alt="Instalación de Bombas" class="service-image">
+                    <h3>Instalación de Bombas</h3>
+                    <p>Instalación y reparación de bombas presurizadoras y sistemas de elevación de agua en hogares y edificios.</p>
+                    <a href="https://wa.me/5493364010482" class="cta-service-card" target="_blank">SOLICITAR PRESUPUESTO</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+<section class="section-trabajos" id="trabajos">
+    <h2>TRABAJOS RECIENTES</h2>
+    
+    <div class="carrusel-wrapper">
+        
+        <button class="carrusel-flecha prev" aria-label="Anterior">&#10094;</button>
+        
+        <div class="carrusel-contenedor">
+            
+            <div class="carrusel-galeria">
+                
+                <div class="trabajo-item">
+                    <img src="assets/aireacondicionadofot.pg.jpeg" alt="Tarjeta electrónica en reparación">
+                </div>
+                
+                <div class="trabajo-item">
+                    <img src="assets/aireacondicionado.jpeg" alt="Unidad de aire acondicionado interior">
+                </div>
+                
+                <div class="trabajo-item">
+                    <img src="assets/bombadeagua.jpeg" alt="Bomba de agua instalada">
+                </div>
+                
+                <div class="trabajo-item">
+                    <img src="assets/bombahidraulica.jpeg" alt="Otro trabajo 4">
+                </div>
+                
+                <div class="trabajo-item">
+                    <img src="assets/plomeriaimg.jpeg" alt="Otro trabajo 5">
+                </div>
+                
+                <div class="trabajo-item">
+                    <img src="assets/otroaire.jpeg" alt="Otro trabajo 6">
+                </div>
+                
+            </div> </div> <button class="carrusel-flecha next" aria-label="Siguiente">&#10095;</button>
+        
+    </div> </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Pavón, Santa Fe, Argentina</p>
+                <a href="tel:+543364010482"><i class="fas fa-phone"></i> (+54) 3364 01-0482</a>
+                <a href="mailto:contacto@r.com"><i class="fas fa-envelope"></i> contacto@r.com</a>
+                <a href="https://wa.me/5493364010482" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i> Whatsapp
+                </a>
+                <a href="https://instagram.com/tu_usuario" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-instagram"></i> Seguinos en Instagram
+                </a>
+            </div>
+            <div class="footer-logo">
+                <img src="./assets/logojctam.png" alt="Logo JCTAM">
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            <p>© Copyright 2025 - Todos los derechos reservados.</p>
+            <p>Desarrollado por <span>Agustina Garcia</span></p>
+        </div>
+    </footer>
+
+    <script src="./JavaScript/carrousel.js"></script>
+    <script src="./JavaScript/menuhambur.js"></script>
+</body>
+</html>
